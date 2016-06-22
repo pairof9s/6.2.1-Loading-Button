@@ -22,4 +22,5 @@ console.log('testing');
 
     module.exports = {
       'Clicker': Clicker,
-    };
+      'ClickerCollection': ClickerCollection
+    }
