@@ -3,31 +3,38 @@ var $ = require('jquery');
 var models = require('./models/button');
 var ClickerCollection = require('./models/button').ClickerCollection;
 
-var loadingButton = Backbone.Model.extend({
-  defaults:{
-    label: 'SUBMIT',
-  },
-});
-console.log();
+var loadingButton = Backbone.Model.extend();
+
+console.log(loadingButton);
+
 var loadingCollection = Backbone.Collection.extend({
   url: 'http://swapi.co/api/planets/',
   parse: function(data){
     return data.results;
   },
 });
-console.log(loadingCollection);
+console.log();
 
-var samStuff = new loadingCollection();
-
-samStuff.fetch();
-console.log(samStuff);
+var planetStuff = new loadingCollection();
 
 $('.buttonbox').text('Submit');
-$('.buttonbox').on('click', function(event){
-  event.preventDefault();
-  $('.buttonbox').text('Loading...');
-  $(this).css({'color': '#999', 'background-image': 'linear-gradient(#eee , #ddd)', 'border': '1px solid #ccc'});
+
+
+planetStuff.on('add', function(model){
+  console.log(model.get('name'));
+  $('.app').append(model);
 });
+
+
+
+
+$('.buttonbox').on('click', function(){
+  $('.buttonbox').text('Loading...');
+  $(this).fetch(planetStuff).done(function(){
+    $(this).css({'color': '#999', 'background-image': 'linear-gradient(#eee , #ddd)', 'border': '1px solid #ccc'});
+  });
+
+}());
 
 
 
