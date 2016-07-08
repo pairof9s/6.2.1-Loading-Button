@@ -5,7 +5,6 @@ var ClickerCollection = require('./models/button').ClickerCollection;
 
 var loadingButton = Backbone.Model.extend();
 
-console.log(loadingButton);
 
 var loadingCollection = Backbone.Collection.extend({
   url: 'http://swapi.co/api/planets/',
@@ -13,12 +12,11 @@ var loadingCollection = Backbone.Collection.extend({
     return data.results;
   },
 });
-console.log();
+
 
 var planetStuff = new loadingCollection();
 
 $('.buttonbox').text('Submit');
-
 
 planetStuff.on('add', function(model){
   console.log(model.get('name'));
@@ -26,11 +24,10 @@ planetStuff.on('add', function(model){
 });
 
 
-
-
 $('.buttonbox').on('click', function(){
   $('.buttonbox').text('Loading...');
-  $(this).fetch(planetStuff).done(function(){
+
+  $(this).get(planetStuff).done(function(){
     $(this).css({'color': '#999', 'background-image': 'linear-gradient(#eee , #ddd)', 'border': '1px solid #ccc'});
   });
 
