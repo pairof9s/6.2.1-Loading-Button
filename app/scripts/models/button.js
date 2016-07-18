@@ -1,7 +1,8 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
 
-var Clicker = Backbone.Model.extend();
+var Clicker = Backbone.Model.extend({
+});
 
 var ClickerCollection = Backbone.Collection.extend({
   url: 'http://tiny-lasagna-server.herokuapp.com/collections/sam',
@@ -11,7 +12,8 @@ var ClickerCollection = Backbone.Collection.extend({
 });
 console.log('testing');
 
-    module.exports = {
-      'Clicker': Clicker,
-      'ClickerCollection': ClickerCollection
-    }
+
+module.exports = {
+  'Clicker': Clicker,
+  'ClickerCollection': ClickerCollection
+}

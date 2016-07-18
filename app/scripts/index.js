@@ -1,9 +1,9 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
-var models = require('./models/button');
+var Clicker = require('./models/button').Clicker;
 var ClickerCollection = require('./models/button').ClickerCollection;
 
-var loadingButton = Backbone.Model.extend();
+var loadingButton = new Clicker();
 
 
 var loadingCollection = Backbone.Collection.extend({
@@ -13,10 +13,9 @@ var loadingCollection = Backbone.Collection.extend({
   },
 });
 
-
 var planetStuff = new loadingCollection();
 
-$('.buttonbox').text('Submit');
+$('.buttonbox').html('Submit');
 
 planetStuff.on('add', function(model){
   console.log(model.get('name'));
@@ -24,10 +23,11 @@ planetStuff.on('add', function(model){
 });
 
 
-$('.buttonbox').on('click', function(){
-  $('.buttonbox').text('Loading...');
+$('.buttonbox').on('click', function(event){
 
-  $(this).get(planetStuff).done(function(){
+  $(this).html('Loading...');
+
+  planetStuff.fetch().done(function(){
     $(this).css({'color': '#999', 'background-image': 'linear-gradient(#eee , #ddd)', 'border': '1px solid #ccc'});
   });
 
